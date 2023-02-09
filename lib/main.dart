@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/models/transaction.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const PersonalExpensesApp());
@@ -60,15 +61,18 @@ class MyHomePage extends StatelessWidget {
                               vertical: 15,
                               horizontal: 20,
                             ),
-                            padding: const EdgeInsets.all(20),
-                            color: Colors.purple,
+                            padding: const EdgeInsets.all(40),
+                            decoration: BoxDecoration(
+                              color: Colors.purple,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
                             child: Text(
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                               ),
-                              transaction.value.toString(),
+                              'R\$ ${transaction.value.toStringAsFixed(0)}',
                             ),
                           ),
                           Column(
@@ -86,7 +90,7 @@ class MyHomePage extends StatelessWidget {
                                 style: const TextStyle(
                                   color: Colors.grey,
                                 ),
-                                transaction.time.toString(),
+                                DateFormat('d MMM, y').format(transaction.time),
                               ),
                             ],
                           ),
