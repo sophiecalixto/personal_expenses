@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expenses/models/transaction.dart';
 
 void main() {
   runApp(const PersonalExpensesApp());
@@ -9,14 +10,29 @@ class PersonalExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key});
+
+  final List<Transaction> transaction = [
+    Transaction(
+      id: 'transacao-1',
+      title: 'Livro Programação Orientada A Objetos',
+      value: 80.0,
+      time: DateTime.now(),
+    ),
+    Transaction(
+      id: 'transacao-2',
+      title: 'Comida Yuki',
+      value: 40.0,
+      time: DateTime.now(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
