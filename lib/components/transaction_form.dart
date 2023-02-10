@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TransactionForm extends StatelessWidget {
-  const TransactionForm({super.key});
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+  final void Function(String title, double value) onSubmit;
+
+  TransactionForm({
+    super.key,
+    required this.onSubmit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +17,15 @@ class TransactionForm extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
                 labelText: 'Título do produto',
               ),
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: valueController,
+              decoration: const InputDecoration(
                 labelText: 'Valor do produto em R\$',
               ),
             ),
@@ -30,7 +39,12 @@ class TransactionForm extends StatelessWidget {
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll<Color>(Colors.purple),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    final String title = titleController.text;
+                    final double value = double.tryParse(valueController.text) ?? 0.0;
+
+                    onSubmit(title, value);
+                  },
                   child: const Text('Adicionar'),
                 ),
               ],
