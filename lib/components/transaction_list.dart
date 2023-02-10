@@ -19,7 +19,7 @@ class TransactionList extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.symmetric(
                         vertical: 15,
-                        horizontal: 20,
+                        horizontal: 5,
                       ),
                       padding: const EdgeInsets.all(40),
                       decoration: const BoxDecoration(
@@ -38,12 +38,16 @@ class TransactionList extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: 210,
+                          child: Text(
+                            softWrap: true,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            transaction.title,
                           ),
-                          transaction.title,
                         ),
                         const Divider(),
                         Text(
