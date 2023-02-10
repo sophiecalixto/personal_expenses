@@ -9,61 +9,63 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ...transactionList
-            .map(
-              (transaction) => Card(
-                child: Row(
+    return Container(
+      height: 400,
+      child: ListView.builder(
+        itemCount: transactionList.length,
+        itemBuilder: (context, index) {
+          final transaction = transactionList[index];
+
+          return Card(
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 5,
+                  ),
+                  padding: const EdgeInsets.all(40),
+                  decoration: const BoxDecoration(
+                    color: Colors.purple,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    'R\$ ${transaction.value.toStringAsFixed(0)}',
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 5,
-                      ),
-                      padding: const EdgeInsets.all(40),
-                      decoration: const BoxDecoration(
-                        color: Colors.purple,
-                        shape: BoxShape.circle,
-                      ),
+                    SizedBox(
+                      width: 210,
                       child: Text(
+                        softWrap: true,
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
-                        'R\$ ${transaction.value.toStringAsFixed(0)}',
+                        transaction.title,
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 210,
-                          child: Text(
-                            softWrap: true,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            transaction.title,
-                          ),
-                        ),
-                        const Divider(),
-                        Text(
-                          style: const TextStyle(
-                            color: Colors.grey,
-                          ),
-                          DateFormat('d MMM, y').format(transaction.time),
-                        ),
-                      ],
+                    const Divider(),
+                    Text(
+                      style: const TextStyle(
+                        color: Colors.grey,
+                      ),
+                      DateFormat('d MMM, y').format(transaction.time),
                     ),
                   ],
                 ),
-              ),
-            )
-            .toList(),
-      ],
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
