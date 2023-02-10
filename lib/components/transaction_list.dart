@@ -25,8 +25,8 @@ class TransactionList extends StatelessWidget {
                     horizontal: 5,
                   ),
                   padding: const EdgeInsets.all(40),
-                  decoration: const BoxDecoration(
-                    color: Colors.purple,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
                     shape: BoxShape.circle,
                   ),
                   child: Text(

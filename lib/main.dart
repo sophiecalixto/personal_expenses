@@ -5,16 +5,24 @@ import 'models/transaction.dart';
 import 'dart:math';
 
 void main() {
-  runApp(const PersonalExpensesApp());
+  runApp(PersonalExpensesApp());
 }
 
 class PersonalExpensesApp extends StatelessWidget {
-  const PersonalExpensesApp({super.key});
+  final ThemeData theme = ThemeData();
+
+  PersonalExpensesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    return MaterialApp(
+      theme: theme.copyWith(
+        colorScheme: const ColorScheme.light(
+          primary: Colors.purple,
+          secondary: Colors.purple,
+        ),
+      ),
+      home: const MyHomePage(),
     );
   }
 }
@@ -70,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text("Despesas Pessoais"),
         actions: [
           IconButton(
@@ -94,7 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openTransactionModal(context),
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
