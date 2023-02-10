@@ -53,6 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       transactionList.add(newTransaction);
     });
+
+    Navigator.of(context).pop();
   }
 
   void _openTransactionModal(BuildContext context) {
