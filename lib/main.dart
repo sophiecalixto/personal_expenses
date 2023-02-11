@@ -17,6 +17,11 @@ class PersonalExpensesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme.copyWith(
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Ubuntu',
+          ),
+        ),
         colorScheme: const ColorScheme.light(
           primary: Colors.purple,
           secondary: Colors.purple,
