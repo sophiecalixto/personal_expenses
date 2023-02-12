@@ -30,11 +30,7 @@ class TransactionList extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Text(
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context).textTheme.headlineLarge,
                     'R\$ ${transaction.value.toStringAsFixed(0)}',
                   ),
                 ),
@@ -45,18 +41,13 @@ class TransactionList extends StatelessWidget {
                       width: 210,
                       child: Text(
                         softWrap: true,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium,
                         transaction.title,
                       ),
                     ),
                     const Divider(),
                     Text(
-                      style: const TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall,
                       DateFormat('d MMM, y').format(transaction.time),
                     ),
                   ],
