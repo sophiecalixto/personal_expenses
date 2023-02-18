@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expenses/components/chart_widget.dart';
 import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'models/transaction.dart';
@@ -43,7 +44,7 @@ class PersonalExpensesApp extends StatelessWidget {
           titleTextStyle: const TextStyle(
             fontFamily: 'Ubuntu',
             fontSize: 18,
-          ),        
+          ),
         ),
       ),
       home: const MyHomePage(),
@@ -59,8 +60,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactionList = [
-  ];
+  final List<Transaction> transactionList = [];
+
+  List<Transaction> get _recentTransactions {
+    return transactionList.where(
+      (element) {
+        return element.time.isAfter(
+          DateTime.now().subtract(
+            const Duration(days: 7),
+          ),
+        );
+      },
+    ).toList();
+  }
 
   void _addTransaction(String title, double value) {
     Transaction newTransaction = Transaction(
@@ -103,10 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Card(
-              color: Colors.purple,
-              child: Text("Gráfico de gastos"),
-            ),
+            ChartWidget(recentTransactions: _recentTransactions),
             TransactionList(
               transactionList: transactionList,
             ),
