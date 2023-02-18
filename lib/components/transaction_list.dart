@@ -40,16 +40,17 @@ class TransactionList extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.symmetric(
                           vertical: 15,
-                          horizontal: 5,
                         ),
                         padding: const EdgeInsets.all(40),
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primary,
                           shape: BoxShape.circle,
                         ),
-                        child: Text(
-                          style: Theme.of(context).textTheme.headlineLarge,
-                          'R\$ ${transaction.value.toStringAsFixed(0)}',
+                        child: FittedBox(
+                          child: Text(
+                            style: Theme.of(context).textTheme.headlineLarge,
+                            'R\$ ${transaction.value.toStringAsFixed(0)}',
+                          ),
                         ),
                       ),
                       Column(

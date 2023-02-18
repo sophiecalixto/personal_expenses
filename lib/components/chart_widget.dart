@@ -46,18 +46,24 @@ class ChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     groupedTransactions;
     return Card(
-      margin: const EdgeInsets.all(20),
       elevation: 6,
-      child: Row(
-        children: [
-          ...groupedTransactions.map(
-            (transaction) => ChartBar(
-              label: transaction['day'] as String,
-              value: transaction['value'] as double,
-              percentage: _weekTotalValue == 0 ? 0 : (transaction['value'] as double) / _weekTotalValue,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ...groupedTransactions.map(
+              (transaction) => Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                  label: transaction['day'] as String,
+                  value: transaction['value'] as double,
+                  percentage: _weekTotalValue == 0 ? 0 : (transaction['value'] as double) / _weekTotalValue,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
