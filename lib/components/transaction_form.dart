@@ -48,59 +48,66 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              onSubmitted: (_) => _submitForm(),
-              controller: _titleController,
-              decoration: const InputDecoration(
-                labelText: 'Título do produto',
+    return SingleChildScrollView(
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+            left: 10,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                onSubmitted: (_) => _submitForm(),
+                controller: _titleController,
+                decoration: const InputDecoration(
+                  labelText: 'Título do produto',
+                ),
               ),
-            ),
-            TextField(
-              onSubmitted: (_) => _submitForm(),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              controller: _valueController,
-              decoration: const InputDecoration(
-                labelText: 'Valor do produto em R\$',
+              TextField(
+                onSubmitted: (_) => _submitForm(),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                controller: _valueController,
+                decoration: const InputDecoration(
+                  labelText: 'Valor do produto em R\$',
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                    ),
                   ),
-                ),
-                OutlinedButton(
-                  onPressed: _showDatePicker,
-                  child: const Text('Selecionar data'),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll<Color>(Colors.purple),
+                  OutlinedButton(
+                    onPressed: _showDatePicker,
+                    child: const Text('Selecionar data'),
                   ),
-                  onPressed: _submitForm,
-                  child: const Text('Adicionar'),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll<Color>(Colors.purple),
+                    ),
+                    onPressed: _submitForm,
+                    child: const Text('Adicionar'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
