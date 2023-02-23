@@ -61,6 +61,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactionList = [];
+  bool _showChart = false;
 
   List<Transaction> get _recentTransactions {
     return transactionList.where(
@@ -106,6 +107,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: const Text("Despesas Pessoais"),
@@ -125,19 +128,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: availableSize * 0.3,
-              child: ChartWidget(
-                recentTransactions: _recentTransactions,
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Exibir gráfico'),
+                  Switch(
+                    value: _showChart,
+                    onChanged: (value) {
+                      setState(() {
+                        _showChart = value;
+                      });
+                    },
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              height: availableSize * 0.7,
-              child: TransactionList(
-                transactionList: transactionList,
-                onDelete: _removeTransaction,
+            if (_showChart || !isLandscape)
+              SizedBox(
+                height: availableSize * (isLandscape ? 0.7 : 0.2),
+                child: ChartWidget(
+                  recentTransactions: _recentTransactions,
+                ),
               ),
-            ),
+            if (!_showChart || !isLandscape)
+              SizedBox(
+                height: availableSize * 0.8,
+                child: TransactionList(
+                  transactionList: transactionList,
+                  onDelete: _removeTransaction,
+                ),
+              ),
           ],
         ),
       ),
