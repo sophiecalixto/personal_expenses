@@ -113,6 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: const Text("Despesas Pessoais"),
       actions: [
+        if (isLandscape)
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _showChart = !_showChart;
+              });
+            },
+            icon: Icon(_showChart ? Icons.list : Icons.bar_chart_outlined),
+          ),
         IconButton(
           onPressed: () => _openTransactionModal(context),
           icon: const Icon(Icons.add),
@@ -128,21 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Exibir gráfico'),
-                  Switch(
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
             if (_showChart || !isLandscape)
               SizedBox(
                 height: availableSize * (isLandscape ? 0.7 : 0.2),
