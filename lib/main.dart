@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             if (!_showChart || !isLandscape)
               SizedBox(
-                height: availableSize * 0.8,
+                height: availableSize * (isLandscape ? 1 : 0.8),
                 child: TransactionList(
                   transactionList: transactionList,
                   onDelete: _removeTransaction,
