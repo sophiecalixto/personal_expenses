@@ -10,6 +10,8 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeOf = Theme.of(context);
+
     return transactionList.isEmpty
         ? LayoutBuilder(
             builder: (context, constraints) {
@@ -18,7 +20,7 @@ class TransactionList extends StatelessWidget {
                   const SizedBox(height: 20),
                   Text(
                     "Não há transações cadastradas",
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: themeOf.textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
@@ -46,23 +48,23 @@ class TransactionList extends StatelessWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    backgroundColor: themeOf.colorScheme.primary,
                     child: Padding(
                       padding: const EdgeInsets.all(6),
                       child: FittedBox(
                         child: Text(
-                          style: Theme.of(context).textTheme.headlineLarge,
+                          style: themeOf.textTheme.headlineLarge,
                           'R\$ ${transaction.value.toStringAsFixed(0)}',
                         ),
                       ),
                     ),
                   ),
                   title: Text(
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: themeOf.textTheme.headlineMedium,
                     transaction.title,
                   ),
                   subtitle: Text(
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: themeOf.textTheme.headlineSmall,
                     DateFormat('d MMM, y').format(transaction.time),
                   ),
                   trailing: MediaQuery.of(context).size.width > 480
@@ -70,12 +72,12 @@ class TransactionList extends StatelessWidget {
                           onPressed: () => onDelete(transaction.id),
                           icon: Icon(
                             Icons.delete,
-                            color: Theme.of(context).errorColor,
+                            color: themeOf.errorColor,
                           ),
                           label: Text(
                             'Excluir',
                             style: TextStyle(
-                              color: Theme.of(context).errorColor,
+                              color: themeOf.errorColor,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -85,7 +87,7 @@ class TransactionList extends StatelessWidget {
                       : IconButton(
                           icon: Icon(
                             Icons.delete,
-                            color: Theme.of(context).errorColor,
+                            color: themeOf.errorColor,
                           ),
                           onPressed: () => onDelete(transaction.id),
                         ),
