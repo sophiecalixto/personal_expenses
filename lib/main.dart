@@ -4,6 +4,7 @@ import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 import 'dart:math';
+import 'dart:io';
 
 void main() {
   runApp(PersonalExpensesApp());
@@ -156,13 +157,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openTransactionModal(context),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              onPressed: () => _openTransactionModal(context),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
     );
   }
 }
